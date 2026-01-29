@@ -1,10 +1,11 @@
 services:
   testing-karavan:
-    image: testing-karavan
+    container_name: testing-karavan
     environment:
       TELEGRAM_TOKEN: ${TELEGRAM_TOKEN}
-    restart: always
-    ports:
-      - "8081:8080"
+    image: localhost:5555/karavan/testing-karavan:latest
     networks:
-      - karavan
+    - karavan
+    ports:
+    - 8081:8080
+    restart: always
