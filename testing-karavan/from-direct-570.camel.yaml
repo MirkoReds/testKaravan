@@ -11,12 +11,7 @@
         - log:
             id: log5c41
             message: body
-        - setBody:
-            id: setBodye157
-            expression:
-              groovy:
-                id: groovy66bc
-                expression: resource:send_tg.groovy
+            loggingLevel: INFO
         - to:
             id: to8e14
             uri: telegram

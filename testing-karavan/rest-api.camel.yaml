@@ -23,4 +23,3 @@
         responseMessage:
           - code: "200"
             message: body
-        consumes: text/plain
