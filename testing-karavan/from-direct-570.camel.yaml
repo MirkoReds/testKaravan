@@ -1,0 +1,26 @@
+- route:
+    id: route-direct-send-telegram-message
+    description: Send Telegram Message
+    nodePrefixId: route-direct-send-telegram-message
+    from:
+      id: fromadc5
+      uri: direct
+      parameters:
+        name: sendTelegramMessage
+      steps:
+        - log:
+            id: log5c41
+            message: body
+        - setBody:
+            id: setBodye157
+            expression:
+              groovy:
+                id: groovy66bc
+                expression: resource:send_tg.groovy
+        - to:
+            id: to8e14
+            uri: telegram
+            parameters:
+              type: bots
+              authorizationToken: "{{TELEGRAM_TOKEN}}"
+              chatId: "212987483"

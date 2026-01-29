@@ -1,14 +1,12 @@
 - route:
-    id: Read Messages
-    description: Read Telegram Messages/ 5s
-    nodePrefixId: route-kamelettimer-source
+    id: route-direct-get-example
+    description: Read Telegram Messages
+    nodePrefixId: route-direct-get-example
     from:
-      id: from17bf
-      description: Every 5s
-      uri: kamelet:timer-source
+      id: from7600
+      uri: direct
       parameters:
-        period: 5000
-        message: Test
+        name: readTelegramMessages
       steps:
         - log:
             id: log525a
@@ -19,6 +17,7 @@
             parameters:
               httpUri: https://api.telegram.org/bot7695146374:AAH4fvVF23AeWCI28gqWcSSuPZmbkFrCHbo/getUpdates?limit=100&timeout=30
               httpMethod: GET
+              bridgeEndpoint: "true"
         - unmarshal:
             id: unmarshal1eb7
             json:
@@ -37,12 +36,12 @@
                     id: groovyaf20
                     expression: "body.size() > 0 "
                 steps:
-                  - script:
-                      id: scripte7b5
+                  - setBody:
+                      id: setBody30ef
                       expression:
                         groovy:
-                          id: groovy9d98
-                          expression: resource:test.groovy
+                          id: groovy67cd
+                          expression: resource:read_tg.groovy
                   - log:
                       id: log62e2
                       message: body

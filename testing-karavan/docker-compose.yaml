@@ -7,5 +7,5 @@ services:
     networks:
     - karavan
     ports:
-    - 8081:8080
+    - 8081:8081
     restart: always

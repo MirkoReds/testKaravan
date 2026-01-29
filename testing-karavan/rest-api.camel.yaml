@@ -1,0 +1,26 @@
+- restConfiguration:
+    component: netty-http
+    scheme: http
+    host: 0.0.0.0
+    port: "8081"
+    inlineRoutes: true
+- rest:
+    id: rest-01c
+    description: Listener
+    get:
+      - id: get7282
+        description: GET readTelegramMessages
+        path: readTelegramMessages
+        to: direct:readTelegramMessages
+        responseMessage:
+          - code: "200"
+            message: body
+    post:
+      - id: postf272
+        description: POST sendTelegramMessage
+        path: sendTelegramMessage
+        to: direct:sendTelegramMessage
+        responseMessage:
+          - code: "200"
+            message: body
+        consumes: text/plain
