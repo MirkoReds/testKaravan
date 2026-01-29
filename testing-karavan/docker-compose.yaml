@@ -1,0 +1,10 @@
+services:
+  testing-karavan:
+    image: testing-karavan
+    environment:
+      TELEGRAM_TOKEN: ${TELEGRAM_TOKEN}
+    restart: always
+    ports:
+      - "8081:8080"
+    networks:
+      - karavan

@@ -1,0 +1,62 @@
+- route:
+    id: Read Messages
+    description: Read Telegram Messages/ 5s
+    nodePrefixId: route-kamelettimer-source
+    from:
+      id: from17bf
+      description: Every 5s
+      uri: kamelet:timer-source
+      parameters:
+        period: 5000
+        message: Test
+      steps:
+        - log:
+            id: log525a
+            message: body
+        - to:
+            id: to92f6
+            uri: https
+            parameters:
+              httpUri: https://api.telegram.org/bot7695146374:AAH4fvVF23AeWCI28gqWcSSuPZmbkFrCHbo/getUpdates?limit=100&timeout=30
+              httpMethod: GET
+        - unmarshal:
+            id: unmarshal1eb7
+            json:
+              id: jsonf3fc
+              library: Fastjson
+        - log:
+            id: logdf12
+            message: body
+        - choice:
+            id: choicef5bb
+            when:
+              - id: whene116
+                description: If Body exists
+                expression:
+                  groovy:
+                    id: groovyaf20
+                    expression: "body.size() > 0 "
+                steps:
+                  - script:
+                      id: scripte7b5
+                      expression:
+                        groovy:
+                          id: groovy9d98
+                          expression: resource:test.groovy
+                  - log:
+                      id: log62e2
+                      message: body
+                      loggingLevel: INFO
+                  - to:
+                      id: to0b7b
+                      uri: kamelet:telegram-sink
+                      parameters:
+                        authorizationToken: "{{TELEGRAM_TOKEN}}"
+                        chatId: 212987483
+            otherwise:
+              id: otherwise89a3
+              steps:
+                - log:
+                    id: log-7e8b
+                    message: body
+                    loggingLevel: INFO
